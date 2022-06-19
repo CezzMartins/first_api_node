@@ -9,8 +9,9 @@ router.get('/radomnumber', apiController.random);
 
 router.get('/nameuser/:name', apiController.name);
 
-router.post('/create', apiController.create)
+router.get('/phrases', apiController.phrases);
 
+router.post('/create', apiController.create)
 
 
 

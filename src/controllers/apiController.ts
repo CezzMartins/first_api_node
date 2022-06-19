@@ -17,6 +17,14 @@ export const name =  (request: Request, response: Response) => {
     let userName = request.params.name;
     response.json({ userName: userName });
 }
+
+export const phrases = async ( request: Request, response: Response) => {
+    const allPhrases = await Phrases.findAll();
+    response.status(200);
+    response.json(allPhrases);
+}
+
+
 export const create = async (request: Request, response: Response) => {
     let {text, author } = await request.body;
     
