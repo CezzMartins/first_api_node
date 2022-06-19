@@ -11,6 +11,8 @@ router.get('/nameuser/:name', apiController.name);
 
 router.get('/phrases', apiController.phrases);
 
+router.get('/phrase/:id', apiController.getPhraseById)
+
 router.post('/create', apiController.create)
 
 

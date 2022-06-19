@@ -6,22 +6,45 @@ export const ping = (request: Request, response: Response) => {
     response.json({
         ping: true
     });
+    return;
 }
+
 
 export const random =  (request: Request, response: Response) => {
     let number: number = Math.floor(Math.random() * 10);
     response.json({ radomNumber: number });
+    return;
 }
+
 
 export const name =  (request: Request, response: Response) => {
     let userName = request.params.name;
     response.json({ userName: userName });
+    return;
 }
+
 
 export const phrases = async ( request: Request, response: Response) => {
     const allPhrases = await Phrases.findAll();
     response.status(200);
     response.json(allPhrases);
+    return;
+}
+
+
+export const getPhraseById = async ( request: Request, response: Response) => {
+    const id = request.params.id;
+    const phrase = await Phrases.findByPk(id);
+
+    if(phrase){
+        response.json({phrase});
+        return;   
+    }
+
+    response.json({ result: "this sentence doesn't exist."})
+    response.json(404);
+    return;
+       
 }
 
 
@@ -31,4 +54,5 @@ export const create = async (request: Request, response: Response) => {
     let newPhrase = await Phrases.create({ author, text });
     response.status(201);
     response.json({ id: newPhrase.id,  author: newPhrase.author, text: newPhrase.text });
+    return;
 }
