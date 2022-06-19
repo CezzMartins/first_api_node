@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Phrase } from '../models/Phrase.model';
+import { Phrases } from '../models/Phrase.model';
 
 
 export const ping = (request: Request, response: Response) => {
@@ -16,4 +16,11 @@ export const random =  (request: Request, response: Response) => {
 export const name =  (request: Request, response: Response) => {
     let userName = request.params.name;
     response.json({ userName: userName });
+}
+export const create = async (request: Request, response: Response) => {
+    let {text, author } = await request.body;
+    
+    let newPhrase = await Phrases.create({ author, text });
+    response.status(201);
+    response.json({ id: newPhrase.id,  author: newPhrase.author, text: newPhrase.text });
 }

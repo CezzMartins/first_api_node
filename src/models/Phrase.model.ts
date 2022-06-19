@@ -9,7 +9,7 @@ interface IPhrase extends Model{
 
 }
 
-export const Phrase = sequelize.define<IPhrase>('Phrase', {
+export const Phrases = sequelize.define<IPhrase>('Phrases', {
     id: {
         primaryKey: true,
         autoIncrement: true,
@@ -22,7 +22,7 @@ export const Phrase = sequelize.define<IPhrase>('Phrase', {
         type: DataTypes.STRING,
     }
 },{
-    tableName: 'phrase',
+    tableName: 'phrases',
     timestamps: false
 }
 )

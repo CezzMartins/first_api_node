@@ -12,7 +12,7 @@ server.use(cors());
 server.use(express.static(path.join(__dirname, '../public')));//define the static folder for images
 server.use(express.urlencoded({extended: true}));
 
-server.use('/api', apiRoutes);
+server.use(apiRoutes);
 
 server.use((request: Request, response: Response) => {
     response.status(404);
