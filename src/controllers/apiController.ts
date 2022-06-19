@@ -2,29 +2,6 @@ import { Request, Response } from 'express';
 import { Sequelize } from 'sequelize';
 import { Phrases } from '../models/Phrase.model';
 
-
-export const ping = (request: Request, response: Response) => {
-    response.json({
-        ping: true
-    });
-    return;
-}
-
-
-export const random =  (request: Request, response: Response) => {
-    let number: number = Math.floor(Math.random() * 10);
-    response.json({ radomNumber: number });
-    return;
-}
-
-
-export const name =  (request: Request, response: Response) => {
-    let userName = request.params.name;
-    response.json({ userName: userName });
-    return;
-}
-
-
 export const phrases = async ( request: Request, response: Response) => {
     const allPhrases = await Phrases.findAll();
     response.status(200);
@@ -82,7 +59,7 @@ export const randomPhrase = async (request: Request , response: Response) => {
     // const phrases =  await Phrases.findAll();
     // const randomNumber = Math.floor(Math.random() * phrases.length)
     // const chooseOne = phrases[randomNumber];
-    
+
      const chooseOne = await Phrases.findOne({
         order: [ Sequelize.fn('RAND') ]
      })
