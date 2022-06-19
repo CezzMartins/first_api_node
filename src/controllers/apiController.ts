@@ -48,6 +48,25 @@ export const getPhraseById = async ( request: Request, response: Response) => {
 }
 
 
+export const updatePhrase = async (request: Request, response: Response) => {
+    const id = request.params.id;
+    const { text, author } = request.body;
+    const phrase = await Phrases.findByPk(id);
+    
+    if(phrase){
+        phrase.author = author;
+        phrase.text = text;
+        await phrase.save();
+
+        response.json({ phrase });
+    }
+
+    response.json({ result: "this sentence doesn't exist."})
+    response.json(404);
+    return;
+}
+
+
 export const create = async (request: Request, response: Response) => {
     let {text, author } = await request.body;
     
@@ -55,4 +74,17 @@ export const create = async (request: Request, response: Response) => {
     response.status(201);
     response.json({ id: newPhrase.id,  author: newPhrase.author, text: newPhrase.text });
     return;
+}
+
+export const deletePhrase = async (request: Request, response: Response) => {
+    const id = request.params.id;
+    const phrase = await Phrases.findByPk(id);
+    if(phrase) {
+        await Phrases.destroy({ where: {id: id}});
+        response.json({ success: "The prhase was Deleted!"})
+    }
+    response.json({ result: "this sentence doesn't exist."})
+    response.json(404);
+    return;
+    
 }
