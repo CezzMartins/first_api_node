@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Sequelize } from 'sequelize';
 import { Phrases } from '../models/Phrase.model';
 
 
@@ -75,6 +76,19 @@ export const create = async (request: Request, response: Response) => {
     response.json({ id: newPhrase.id,  author: newPhrase.author, text: newPhrase.text });
     return;
 }
+
+
+export const randomPhrase = async (request: Request , response: Response) => {
+    // const phrases =  await Phrases.findAll();
+    // const randomNumber = Math.floor(Math.random() * phrases.length)
+    // const chooseOne = phrases[randomNumber];
+    
+     const chooseOne = await Phrases.findOne({
+        order: [ Sequelize.fn('RAND') ]
+     })
+    response.json({chooseOne});
+}
+
 
 export const deletePhrase = async (request: Request, response: Response) => {
     const id = request.params.id;

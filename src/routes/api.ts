@@ -13,6 +13,8 @@ router.get('/phrases', apiController.phrases);
 
 router.get('/phrase/:id', apiController.getPhraseById)
 
+router.get('/random', apiController.randomPhrase);
+
 router.post('/create', apiController.create);
 
 router.put('/update/:id', apiController.updatePhrase);
